@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div class="alert-box" id="altInputId">Please input ID <button id="btnCloseInputId" onclick="setDisplay('altInputId', 'none')">X</button></div>
+    <div class="alert-box" id="altInputId">Please input ID <button id="btnCloseInputId">X</button></div>
     <div class="alert-box" id="altInputPw" style="margin-top: 5px;">Please input password <button id="btnCloseInputPw" onclick="setDisplay('altInputPw', 'none')">X</button></div>
     <button id="btnId" onclick="setDisplay('altInputId', 'block')">Input ID</button>
     <button id="btnPw" onclick="setDisplay('altInputPw', 'block')">Input Pw</button>
 </body>
 <script>
+    document.getElementById('btnCloseInputId').addEventListener('click', function() {
+        document.getElementById('altInputId').style.display = 'none';
+    });
+    
     function setDisplay(id, display) {
         let obj = document.getElementById(id);
         
