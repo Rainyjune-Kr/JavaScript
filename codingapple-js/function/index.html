@@ -16,13 +16,23 @@
     <div class="black-bg">
         <div class="white-bg">
             <h4>Please login</h4>
-            <button class="btn btn-danger" id="close">Close</button>
+            <form id="frmLogin" action="success.html">
+                <div class="my-3">
+                    <input id="txtId" type="text" class="form-control">
+                </div>
+                <div class="my-3">
+                    <input id="txtPw" type="password" class="form-control">
+                </div>
+                <button id="btnSubmit" type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" id="close">Close</button>    
+            </form>
         </div>
     </div>
 
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
             <span class="navbar-brand">Navbar</span>
+            <span class="badge bg-dark">Dark 🔄</span>
             <button class="navbar-toggler" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,6 +59,33 @@
 
         $("#close").on("click", function() {
             $(".black-bg").removeClass("show-modal");
+        })
+
+        $("#frmLogin").on("submit", function(e) {
+            if ($("#txtId").val() == "" || $("#txtPw").val() == "") {
+                e.preventDefault();
+                alert("Please input ID/Password");
+            } else if ($("#txtPw").val().length < 6) {
+                e.preventDefault();
+                alert("Please input password over 6 characters");
+            }
+        })
+
+        let clickCnt = 0;
+
+        $('.badge').on('click', function() {
+            clickCnt++;
+            if (clickCnt % 2 == 1) {
+                $('.badge').removeClass('bg-dark');
+                $('.badge').addClass('bg-light');
+                $('.badge').css('color', 'black');
+                $('.badge').text('Light 🔄');
+            } else {
+                $('.badge').addClass('bg-dark');
+                $('.badge').removeClass('bg-light');
+                $('.badge').css('color', 'white');
+                $('.badge').text('Dark 🔄');
+            }
         })
     </script>
 </body>
