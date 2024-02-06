@@ -24,7 +24,7 @@
     padding: 30px;
     visibility: hidden;
     opacity: 0;
-    transition: all 1s;
+    transition: all 0.2s;
 }
 
 .show-modal {
@@ -36,4 +36,18 @@
     background: white;
     border-radius: 5px;
     padding: 30px;
+}
+
+.slide-container {
+    width: 300vw;
+    transition: all 0.3s;
+}
+
+.slide-box {
+    width: 100vw;
+    float: left;
+}
+
+.slide-box img {
+    width: 100%;
 }
