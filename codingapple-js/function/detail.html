@@ -47,6 +47,23 @@
     </style>
 </head>
 <body>
+    <div class="container mt-3">
+      <div id="product" class="card p-3">
+        상품명/가격
+      </div>
+    </div>
+
+    <script>
+      var car = ['소나타', 50000, 'white'];
+      console.log(car[0]);
+
+      var car2 = {name: '소나타', price: 50000};
+      console.log(car2.name);
+
+      var product = document.getElementById('product');
+      product.innerHTML = car2.name + "/" + car2.price;
+    </script>
+
     <div class="container mt-5">
         <ul class="list">
           <li class="tab-button">Products</li>
