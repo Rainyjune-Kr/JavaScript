@@ -76,22 +76,24 @@
         }
 
         var shirtsSize = [95, 100];
-        var pantsSize = [28, 30];
+        var pantsSize = [28, 30, 32, 34];
 
         var sizeOption = document.getElementById('sizeOption');
 
         if (product.value == 'shirt') {
           sizeOption.innerHTML = '';
-          var optionString = '';
           for (shirtIdx = 0; shirtIdx < shirtsSize.length; shirtIdx++) {
             $('#sizeOption').append('<option>' + shirtsSize[shirtIdx] + '</option>');
           }
         } else if (product.value == 'pants') {
           sizeOption.innerHTML = '';
-          var optionString = '';
-          for (pantsIdx = 0; pantsIdx < pantsSize.length; pantsIdx++) {
-            $('#sizeOption').append('<option>' + pantsSize[pantsIdx] + '</option>');
-          }
+          // for (pantsIdx = 0; pantsIdx < pantsSize.length; pantsIdx++) {
+          //   $('#sizeOption').append('<option>' + pantsSize[pantsIdx] + '</option>');
+          // }
+
+          pantsSize.forEach(element => {
+            $('#sizeOption').append(`<option>${element}</option>`);
+          });
         }
 
         sizeOption.style.display = display;
