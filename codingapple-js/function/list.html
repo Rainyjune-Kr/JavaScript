@@ -10,7 +10,7 @@
     
 </head>
 <body>
-    <div class="card-group container">
+    <!-- <div class="card-group container">
         <div class="card">
           <img src="https://via.placeholder.com/600">
           <div class="card-body">
@@ -35,27 +35,64 @@
             <button class="btn btn-danger">주문하기</button>
           </div>
         </div>
+    </div> -->
+    
+    <div class="container">
+      <div id ="row" class="row">
       </div>
-      
-      <script>
-        var products = [
+    </div>
+    <script>
+      var products = [
           { id : 0, price : 70000, title : 'Blossom Dress' },
           { id : 1, price : 50000, title : 'Springfield Shirt' },
           { id : 2, price : 60000, title : 'Black Monastery' }
-        ];
+      ];
 
-        var cardBodyTitle = document.querySelectorAll(".card-body");
-        console.log(cardBodyTitle);
-        for (i = 0; i < cardBodyTitle.length; i++) {
-            for (j = 0; j < cardBodyTitle[i].childElementCount; j++) {
-                if (cardBodyTitle[i].children[j].className == "title") {
-                    cardBodyTitle[i].children[j].innerHTML = products[i].title;
-                } else if (cardBodyTitle[i].children[j].className == "price") {
-                    cardBodyTitle[i].children[j].innerHTML = products[i].price;
-                }
-            }
-        }
+      products.forEach((eachProduct) => {
+        $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
+      })
+
+      function GenerateCard(title, price) {
+        var card = 
+        `<div class='col-sm-4'>
+          <img src='https://via.placeholder.com/600' class='w-100'>
+          <h5>${title}</h5>
+          <p>가격 : ${price}</p>
+        </div>`;
+
+        return card;
+      }
+
+        // var cardBodyTitle = document.querySelectorAll(".card-body");
+        // console.log(cardBodyTitle);
+        // for (i = 0; i < cardBodyTitle.length; i++) {
+        //     for (j = 0; j < cardBodyTitle[i].childElementCount; j++) {
+        //         if (cardBodyTitle[i].children[j].className == "title") {
+        //             cardBodyTitle[i].children[j].innerHTML = products[i].title;
+        //         } else if (cardBodyTitle[i].children[j].className == "price") {
+        //             cardBodyTitle[i].children[j].innerHTML = products[i].price;
+        //         }
+        //     }
+        // }
       </script> 
+
+      <script>
+        $.get('https://codingapple1.github.io/hello.txt')
+          .done(function(data) {
+          console.log(data);
+        }).fail(function() {
+          console.log('failed');
+        });
+
+        $.get('https://codingapple1.github.io/price.json')
+          .done(function(data) {
+          console.log(data);
+        }).fail(function() {
+          console.log('failed');
+        });
+
+
+      </script>
 </body>
 
 </html>
