@@ -62,6 +62,63 @@
 
       var product = document.getElementById('product');
       product.innerHTML = car2.name + "/" + car2.price;
+
+      function showSize() {
+        var product = document.getElementById('productSelection');
+        var display = 'none';
+        for (optionIdx = 0; optionIdx < product.options.length; optionIdx++) {
+          if (product.options[optionIdx].selected) {
+            var selectedOption = product.options[optionIdx];
+            if (selectedOption.value != null && selectedOption.value.length > 0) {
+              display = '';
+            }
+          } 
+        }
+
+        var shirtsSize = [95, 100];
+        var pantsSize = [28, 30];
+
+        var sizeOption = document.getElementById('sizeOption');
+
+        if (product.value == 'shirt') {
+          sizeOption.innerHTML = '';
+          var optionString = '';
+          for (shirtIdx = 0; shirtIdx < shirtsSize.length; shirtIdx++) {
+            $('#sizeOption').append('<option>' + shirtsSize[shirtIdx] + '</option>');
+          }
+        } else if (product.value == 'pants') {
+          sizeOption.innerHTML = '';
+          var optionString = '';
+          for (pantsIdx = 0; pantsIdx < pantsSize.length; pantsIdx++) {
+            $('#sizeOption').append('<option>' + pantsSize[pantsIdx] + '</option>');
+          }
+        }
+
+        sizeOption.style.display = display;
+      }
+    </script>
+
+    <form class="container my-5 form-group">
+      <p>상품선택</p>
+      <select id="productSelection" class="form-select mt-2" onchange="showSize()">
+        <option value=""></option>
+        <option value="hat">모자</option>
+        <option value="shirt">셔츠</option>
+        <option value="pants">바지</option>
+      </select>
+      <select id="sizeOption" class="form-select mt-2" style="display: none;">
+        <option>95</option>
+        <option>100</option>
+      </select>
+    </form>
+
+    <div id="test">
+
+    </div>
+
+    <script>
+      var a = '<p>안녕</p>';
+      $('#test').append(a);
     </script>
 
     <div class="container mt-5">
