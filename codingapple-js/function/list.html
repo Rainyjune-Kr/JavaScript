@@ -41,6 +41,37 @@
       <div id ="row" class="row">
       </div>
     </div>
+
+    <div class="container">
+      <button id='more' class="btn btn-danger">더보기</button>
+    </div>
+
+    <script>
+      var clickCnt = 0;
+
+      $('#more').click(function() {
+        var url = '';
+        if (clickCnt == 0) {
+          url = 'https://codingapple1.github.io/js/more1.json';
+        } else if (clickCnt == 1) {
+          url = 'https://codingapple1.github.io/js/more2.json';
+        }
+        $.get(url)
+        .done(data => {
+          console.log(data);
+          data.forEach(element => {
+            $('#row').append(GenerateCard(element.title, element.price));
+          });
+        })
+        if (clickCnt == 1) {
+          this.style.display = 'none';
+        }
+
+        clickCnt++;
+      });
+
+    </script>
+
     <script>
       var products = [
           { id : 0, price : 70000, title : 'Blossom Dress' },
