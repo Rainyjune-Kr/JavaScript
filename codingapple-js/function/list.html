@@ -43,6 +43,9 @@
     </div>
 
     <div class="container">
+      <button id="orderPrice" class="btn btn-danger">가격순 정렬</button>
+      <button id="orderTitleDesc" class="btn btn-danger">이름순 정렬</button>
+      <button id="filterPrice" class="btn btn-danger">가격 필터</button>
       <button id='more' class="btn btn-danger">더보기</button>
     </div>
 
@@ -60,6 +63,12 @@
         .done(data => {
           console.log(data);
           data.forEach(element => {
+            products.push(element);
+          });
+          
+          console.log(products);
+          $('#row').html('');
+          products.forEach(element => {
             $('#row').append(GenerateCard(element.title, element.price));
           });
         })
@@ -70,6 +79,45 @@
         clickCnt++;
       });
 
+      $('#orderPrice').click(function() {
+        var productsCopy = products.slice();
+
+        productsCopy.sort(function (a, b) {
+          return a.price - b.price;
+        })
+
+        $('.row').html('');
+
+        productsCopy.forEach((eachProduct) => {
+          $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
+        })
+      })
+
+      $('#orderTitleDesc').click(function() {
+        var productsCopy = products.slice();
+
+        productsCopy.sort(function (a, b) {
+          return a.title < b.title; 
+        });
+
+        $('#row').html('');
+        productsCopy.forEach((eachProduct) => {
+          $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
+        })
+      })
+
+      $('#filterPrice').click(function() { 
+        var productsCopy = products.slice();
+
+        var filteredList = productsCopy.filter((eachProduct) => {
+          return eachProduct.price < 60000;
+        })
+
+        $('#row').html('');
+        filteredList.forEach((eachProduct) => {
+          $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
+        })
+      })
     </script>
 
     <script>
@@ -106,6 +154,17 @@
         //     }
         // }
       </script> 
+
+      <script>
+        // var testArray = [7, 3, 5, 2, 40];
+
+        // testArray.sort();
+        // console.log(testArray);
+        // testArray.sort(function(a, b) {
+        //   return a - b;
+        // });
+        // console.log(testArray);
+      </script>
 
       <script>
         $.get('https://codingapple1.github.io/hello.txt')
