@@ -10,33 +10,6 @@
     
 </head>
 <body>
-    <!-- <div class="card-group container">
-        <div class="card">
-          <img src="https://via.placeholder.com/600">
-          <div class="card-body">
-            <h5 class="title">Card title</h5>
-            <p class="price">가격 : 70000</p>
-            <button class="btn btn-danger">주문하기</button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/600">
-          <div class="card-body">
-            <h5 class="title">Card title</h5>
-            <p class="price">가격 : 70000</p>
-            <button class="btn btn-danger">주문하기</button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/600">
-          <div class="card-body">
-            <h5 class="title">Card title</h5>
-            <p class="price">가격 : 70000</p>
-            <button class="btn btn-danger">주문하기</button>
-          </div>
-        </div>
-    </div> -->
-    
     <div class="container">
       <div id ="row" class="row">
       </div>
@@ -50,6 +23,12 @@
     </div>
 
     <script>
+      var products = [
+          { id : 0, price : 70000, title : 'Blossom Dress' },
+          { id : 1, price : 50000, title : 'Springfield Shirt' },
+          { id : 2, price : 60000, title : 'Black Monastery' }
+      ];
+      
       var clickCnt = 0;
 
       $('#more').click(function() {
@@ -66,11 +45,7 @@
             products.push(element);
           });
           
-          console.log(products);
-          $('#row').html('');
-          products.forEach(element => {
-            $('#row').append(GenerateCard(element.title, element.price));
-          });
+          ShowProducts(products);
         })
         if (clickCnt == 1) {
           this.style.display = 'none';
@@ -86,11 +61,7 @@
           return a.price - b.price;
         })
 
-        $('.row').html('');
-
-        productsCopy.forEach((eachProduct) => {
-          $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
-        })
+        ShowProducts(productsCopy);
       })
 
       $('#orderTitleDesc').click(function() {
@@ -100,10 +71,7 @@
           return a.title < b.title; 
         });
 
-        $('#row').html('');
-        productsCopy.forEach((eachProduct) => {
-          $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
-        })
+        ShowProducts(productsCopy);
       })
 
       $('#filterPrice').click(function() { 
@@ -113,75 +81,62 @@
           return eachProduct.price < 60000;
         })
 
+        ShowProducts(filteredList);
+      })
+
+      $(document).ready(function() {
+        ShowProducts(products);
+      })
+
+      $(document).on('click', '#addCart', function(e) {
+        console.log('click!');
+
+        var siblings = $(this).siblings();
+        for (siblingIdx = 0; siblingIdx < siblings.length; siblingIdx++) {
+          var eachSibling = siblings[siblingIdx];
+
+          if (eachSibling.className == 'productTitle') {
+            AddCart(eachSibling.textContent);
+          }
+        }
+      })
+
+      function AddCart(item) {
+        var cartItem = localStorage.getItem('cart');
+        var saveItem = null;
+        if (cartItem == null || cartItem == undefined) {
+          saveItem = [];
+        } else {
+          saveItem = JSON.parse(cartItem);
+        }
+
+        saveItem.push(item);
+        localStorage.setItem('cart', JSON.stringify(saveItem));
+      }
+
+      function ShowProducts(show) {
         $('#row').html('');
-        filteredList.forEach((eachProduct) => {
+
+        show.forEach(eachProduct => {
           $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
         })
-      })
-    </script>
+      }
 
-    <script>
-      var products = [
-          { id : 0, price : 70000, title : 'Blossom Dress' },
-          { id : 1, price : 50000, title : 'Springfield Shirt' },
-          { id : 2, price : 60000, title : 'Black Monastery' }
-      ];
-
-      products.forEach((eachProduct) => {
-        $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
-      })
+      // products.forEach((eachProduct) => {
+      //   $('#row').append(GenerateCard(eachProduct.title, eachProduct.price));
+      // })
 
       function GenerateCard(title, price) {
         var card = 
-        `<div class='col-sm-4'>
+        `<div class='col-sm-4 product'>
           <img src='https://via.placeholder.com/600' class='w-100'>
-          <h5>${title}</h5>
-          <p>가격 : ${price}</p>
+          <h5 class='productTitle'>${title}</h5>
+          <p class='productPrice'>가격 : ${price}</p>
+          <button id='addCart' class='addCart'>구매하기</button>
         </div>`;
 
         return card;
       }
-
-        // var cardBodyTitle = document.querySelectorAll(".card-body");
-        // console.log(cardBodyTitle);
-        // for (i = 0; i < cardBodyTitle.length; i++) {
-        //     for (j = 0; j < cardBodyTitle[i].childElementCount; j++) {
-        //         if (cardBodyTitle[i].children[j].className == "title") {
-        //             cardBodyTitle[i].children[j].innerHTML = products[i].title;
-        //         } else if (cardBodyTitle[i].children[j].className == "price") {
-        //             cardBodyTitle[i].children[j].innerHTML = products[i].price;
-        //         }
-        //     }
-        // }
-      </script> 
-
-      <script>
-        // var testArray = [7, 3, 5, 2, 40];
-
-        // testArray.sort();
-        // console.log(testArray);
-        // testArray.sort(function(a, b) {
-        //   return a - b;
-        // });
-        // console.log(testArray);
-      </script>
-
-      <script>
-        $.get('https://codingapple1.github.io/hello.txt')
-          .done(function(data) {
-          console.log(data);
-        }).fail(function() {
-          console.log('failed');
-        });
-
-        $.get('https://codingapple1.github.io/price.json')
-          .done(function(data) {
-          console.log(data);
-        }).fail(function() {
-          console.log('failed');
-        });
-
-
       </script>
 </body>
 
