@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+</head>
+<body>
+    <div id="quiz">
+        <h4>물에 빠지면 누구부터 구할까요</h4>
+        <button>와이프</button>
+        <button>부모님</button>
+        <button>개</button>
+    </div>
+    
+
+    <script>
+        document.querySelector('#quiz').addEventListener('click', function (e) {
+            switch(e.target.innerHTML) {
+                case '와이프': 
+                    alert('wife!');
+                    break;
+                case '부모님':
+                    alert('parents');
+                    break;
+                case '개':
+                    alert('?');
+                    break;
+            }
+        });
+        // let variable = 2 + 2;
+        // switch(variable) {
+        //     case 3:
+        //         alert('3!');
+        //         break;
+        //     case 4:
+        //         alert('4!');
+        //         break;
+        //     default:
+        //         alert('nothing!');
+        //         break;
+        // } 
+    </script>
+</body>
+</html>
